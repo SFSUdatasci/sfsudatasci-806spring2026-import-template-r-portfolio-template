@@ -39,19 +39,13 @@ Quarto runs R in the same way as a script: objects only exist after the chunks t
 
 Using `here()` is a convenient way to build paths relative to your project root (e.g., your `.qmd` might live in `scripts/` while data lives in `data/`).
 
-```{r}
-bg_chem <- read_csv(here::here("data", "BGchem2008data.csv"))
-```
+#```{r}
+#bg_chem <- read_csv(here::here("data", "BGchem2008data.csv"))
+#```
 
 (Optional) Quick peek at the data:
 
-```{r}
-# Uncomment if you want more inspection output
- names(bg_chem)
-# str(bg_chem)
-# head(bg_chem)
-# summary(bg_chem)
-```
+
 
 # Analysis
 
@@ -61,37 +55,20 @@ As the “analysis”, we’ll calculate a few simple summary statistics and exa
 
 Compute mean nutrient values (using `na.rm = TRUE` so missing values don’t break the calculation).
 
-```{r}
-nitrate <- mean(bg_chem$NO3, na.rm = TRUE)
-nitrite <- mean(bg_chem$NO2, na.rm = TRUE)
-amm     <- mean(bg_chem$NH4, na.rm = TRUE)
-phos    <- mean(bg_chem$P,   na.rm = TRUE)
-```
+
 
 ## Calculate mean Redfield ratio
 
-```{r}
-ratio <- (nitrate + nitrite + amm) / phos
-ratio
-```
+
 
 You can report results inline in Quarto like this:
 
-The Redfield ratio for this dataset is approximately: `r round(ratio)`
+The Redfield ratio for this dataset is approximately: 
 
 ## Plot Redfield ratio measurements
 
 Finally, create a simple base R plot that shows the relationship between phosphate and the total nitrogen components.
 
-```{r}
-plot(
-  bg_chem$P,
-  bg_chem$NO2 + bg_chem$NO3 + bg_chem$NH4,
-  xlab = "Phosphate (P)",
-  ylab = "Total nitrogen (NO2 + NO3 + NH4)",
-  main = "Ocean water samples: total N vs P"
-)
-```
 
 # Conclusion
 

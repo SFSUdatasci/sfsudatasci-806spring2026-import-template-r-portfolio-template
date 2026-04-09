@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Portfolio</title>
+<title>Literate Analysis with Ocean Water Samples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,20 +20,55 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="a01_quarto_literate_analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="a01_quarto_literate_analysis_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="a01_quarto_literate_analysis_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="a01_quarto_literate_analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="a01_quarto_literate_analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="a01_quarto_literate_analysis_files/libs/quarto-html/anchor.min.js"></script>
+<link href="a01_quarto_literate_analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="a01_quarto_literate_analysis_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="a01_quarto_literate_analysis_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="a01_quarto_literate_analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="a01_quarto_literate_analysis_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -46,8 +81,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#course-lessons" id="toc-course-lessons" class="nav-link active" data-scroll-target="#course-lessons">Course Lessons</a></li>
-  <li><a href="#course-practice-session" id="toc-course-practice-session" class="nav-link" data-scroll-target="#course-practice-session">Course Practice Session</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the data</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  </ul></li>
+  <li><a href="#read-in-the-data" id="toc-read-in-the-data" class="nav-link" data-scroll-target="#read-in-the-data">Read in the data</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
+  <ul class="collapse">
+  <li><a href="#calculate-summary-statistics" id="toc-calculate-summary-statistics" class="nav-link" data-scroll-target="#calculate-summary-statistics">Calculate summary statistics</a></li>
+  <li><a href="#calculate-mean-redfield-ratio" id="toc-calculate-mean-redfield-ratio" class="nav-link" data-scroll-target="#calculate-mean-redfield-ratio">Calculate mean Redfield ratio</a></li>
+  <li><a href="#plot-redfield-ratio-measurements" id="toc-plot-redfield-ratio-measurements" class="nav-link" data-scroll-target="#plot-redfield-ratio-measurements">Plot Redfield ratio measurements</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
 </div>
@@ -55,7 +101,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Portfolio</h1>
+<h1 class="title">Literate Analysis with Ocean Water Samples</h1>
+<p class="subtitle lead">coreR Session 05 — Section 5.7 Practice</p>
 </div>
 
 
@@ -72,24 +119,63 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome! Hello World!<br>
-This is my portfolio for learning <strong>R, data analysis, GitHub, and Quarto</strong>.</p>
-<section id="course-lessons" class="level2">
-<h2 class="anchored" data-anchor-id="course-lessons">Course Lessons</h2>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This Quarto document follows the <strong>Section 5.7 practice exercise</strong> from coreR <em>Session 05 (Literate Analysis with Quarto)</em>: building a simple <strong>prose + code</strong> analysis using real seawater chemistry data (<code>BGchem2008data.csv</code>).<br>
+Source: <a href="https://learning.nceas.ucsb.edu/2024-10-coreR/session_05.html" class="uri">https://learning.nceas.ucsb.edu/2024-10-coreR/session_05.html</a></p>
+<section id="about-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-data">About the data</h2>
+<p>The seawater chemistry dataset used here is <code>BGchem2008data.csv</code> (downloaded previously in the course).</p>
 <ul>
-<li><a href="assignments/a01_quarto_literate_analysis.html">Quarto Literate Analysis</a></li>
-<li>Data Wrangling and Cleaning</li>
-<li>Data Visualization</li>
-<li>Functions and packages</li>
+<li>Date downloaded: August 8, 2025</li>
+<li>Download source: <a href="https://arcticdata.io/metacat/d1/mn/v2/object/urn%3Auuid%3A35ad7624-b159-4e29-a700-0c0770419941" class="uri">https://arcticdata.io/metacat/d1/mn/v2/object/urn%3Auuid%3A35ad7624-b159-4e29-a700-0c0770419941</a></li>
 </ul>
+<p>You will explore the nitrogen to phosphate ratio, which indicates the health of the ocean ecosystem. <a href="https://beal-agulhas.earth.miami.edu/teaching/courses/lecture-five/index.html" class="uri">https://beal-agulhas.earth.miami.edu/teaching/courses/lecture-five/index.html</a></p>
 </section>
-<section id="course-practice-session" class="level2">
-<h2 class="anchored" data-anchor-id="course-practice-session">Course Practice Session</h2>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Best practice: put all <code>library()</code> calls in one chunk near the top so collaborators can see what packages are required.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="read-in-the-data" class="level1">
+<h1>Read in the data</h1>
+<p>Quarto runs R in the same way as a script: objects only exist after the chunks that create them have been run.</p>
+<p>Using <code>here()</code> is a convenient way to build paths relative to your project root (e.g., your <code>.qmd</code> might live in <code>scripts/</code> while data lives in <code>data/</code>).</p>
+<p>#<code>{r} #bg_chem &lt;- read_csv(here::here("data", "BGchem2008data.csv")) #</code></p>
+<p>(Optional) Quick peek at the data:</p>
+</section>
+<section id="analysis" class="level1">
+<h1>Analysis</h1>
+<p>As the “analysis”, we’ll calculate a few simple summary statistics and examine how the nitrogen:phosphate values compare to the <strong>Redfield ratio</strong> concept.</p>
+<section id="calculate-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-summary-statistics">Calculate summary statistics</h2>
+<p>Compute mean nutrient values (using <code>na.rm = TRUE</code> so missing values don’t break the calculation).</p>
+</section>
+<section id="calculate-mean-redfield-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-mean-redfield-ratio">Calculate mean Redfield ratio</h2>
+<p>You can report results inline in Quarto like this:</p>
+<p>The Redfield ratio for this dataset is approximately:</p>
+</section>
+<section id="plot-redfield-ratio-measurements" class="level2">
+<h2 class="anchored" data-anchor-id="plot-redfield-ratio-measurements">Plot Redfield ratio measurements</h2>
+<p>Finally, create a simple base R plot that shows the relationship between phosphate and the total nitrogen components.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this mini-analysis, we:</p>
 <ul>
-<li>Practice I</li>
-<li>Practice II</li>
-<li>Practice III</li>
+<li>Loaded packages in a dedicated setup chunk</li>
+<li>Read in <code>BGchem2008data.csv</code> using a project-root-relative path (<code>here()</code>)</li>
+<li>Calculated simple nutrient means</li>
+<li>Computed a mean nitrogen:phosphate ratio</li>
+<li>Created a basic plot relating total nitrogen to phosphate</li>
 </ul>
+<p>This is the core idea of <strong>literate analysis</strong>: combine narrative and code in one document so the workflow is easier to understand and reproduce.</p>
 </section>
 
 </main>
